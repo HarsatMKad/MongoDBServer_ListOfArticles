@@ -47,9 +47,8 @@ app.post("/list", function (req, res) {
 
   (async () => {
     dataList = await run(search, author)
+    res.render("page", { data: dataList, Search: search, Author: author });
   })()
-
-  res.render("page", { data: dataList, Search: search, Author: author });
 })
 
 const PORT = 3000
