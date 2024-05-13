@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body style="background-color: #AFEEEE ">
+  <form action="/" method="get">
+    <button type="submit">Back</button>
+  </form>
+
+  <% if(deleted == true) { %>
+  <h1 align="center">Deleted</h1>
+  <% } else { %>
+  <form action="/article/deleted/?id=<%= data[0]._id%>" method="post">
+    <input type="submit" value="Delete">
+  </form>
+  <% } %>
+
+  <h1><%= data[0].name %></h1>
+  <h4><%= data[0].author %></h4>
+  <h4><%= data[0].posting_date %></h4>
+
+  <h2>Tags</h2>
+  <ul type="disc">
+    <% for (let i = 0; i < data[0].tags.length; i++) { %>
+    <li><%= data[0].tags[i] %></li>
+    <% } %>
+  </ul>
+
+  <h3><%= data[0].content %></h3>
+
+  <h2>Grades</h2>
+  <% for (let i = 0; i < data[0].reviews.length; i++) { %>
+  <hr>
+  <h4 style="white-space: pre">
+    <%= data[0].reviews[i].name %>         Grade: <%= data[0].reviews[i].grade %></h4style="white-space:>
+    <h3> <%= data[0].reviews[i].content %>  </h3>
+    <hr>
+    <% } %>
+</body>
+</html>

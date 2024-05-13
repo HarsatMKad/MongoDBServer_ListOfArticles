@@ -3,26 +3,21 @@
 <head>
   <meta charset="utf-8" />
 </head>
-<body>
+<body style="background-color: #AFEEEE ">
   <h1>List of articles</h1>
 
-  <% if(locals.Search) { %>
-  <h4>Articles with "<%= Search %>"</h4>
-
-  <% if(locals.Author) { %>
-  <h4>Articles author is "<%= Author %>"</h4>
-  <% } %>
-
-  <form action="/" method="get">
-    <button type="submit">Back</button>
+  <form action="/create" method="get">
+    <input type="submit" value="Create article">
   </form>
-  <% } else { %>
-  <form action="/list" method="post">
+  <form action="/topArticle" method="get">
+    <input type="submit" value="Top article">
+  </form>
 
+  <form action="/list" method="post">
     <h4 style="white-space: pre ">Search by author          Search by name</h4>
     <select class="selectpicker" data-style="btn-info" name="selectpicker">
       <optgroup label="Select Author">
-        <option value="null">Authors</option>
+        <option value="null">All Authors</option>
         <option value="first author">first author</option>
         <option value="second author">second author</option>
         <option value="third author">third author</option>
@@ -31,16 +26,25 @@
       </optgroup>
     </select>
 
-
     <input type="text" name="Search" placeholder="Search by name">
+
+    <h4 style="white-space: pre ">             Search by date</h4>
+    <h4 style="white-space: pre ">  Start date             End date</h4>
+    <input type="date" name="startDate">
+    <input type="date" name="endDate">
     <input type="submit" value="Show List">
   </form>
-  <% } %>
+  <hr>
 
   <% for (let i = 0; i < data.length; i++) { %>
+  <hr>
   <h2><%= (i +1) + " " + data[i].name %></h2>
   <h4><%= data[i].author %></h4>
   <h4><%= data[i].posting_date %></h4>
+  <form action="/article?id=<%= data[i]._id%>" method="post">
+    <input type="submit" value="open">
+  </form>
+  <hr>
   <% } %>
 
 </body>
